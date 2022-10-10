@@ -1,7 +1,43 @@
-const { default: axios } = require("axios");
-let characters = []
+ let lightSide = [
+    {
+    name: 'ObiWan',
+    type: 'jedi',
+    id: 0
+    },
+    {
+    name:'Luke',
+    type: 'padawan and my favorite character',
+    id: 1
+    },
+    {
+    name:'Yoda', 
+    type: 'grand master',
+    id: 2
+    },
+    {
+    name:'Leia', 
+    type: 'rebellion leader',
+    id: 3
+    },
+    {
+    name: 'Chewy', 
+    type: 'RRWWWGG', 
+    id: 4
+    },
+    {
+    name: 'Anakin',
+    type: 'not a jedi master', 
+    id: 5
+    },
+    {
+    name: 'Ashoka Tano',
+    type: 'Also Favorite character',
+    id: 6
+    }
 
-axios.get("https://swapi.dev/api/people").then(res => characters = res.data.results)
+
+]
+let globalId = lightSide.length
 
 module.exports = {
 
@@ -24,7 +60,16 @@ module.exports = {
         res.status(200).send(randomFortune);
     },
     getCharacter: (req, res) => {
-        res.status(200).send(randomFortune)
+        
+     res.status(200).send(lightSide)
+    },
+    addCharacter: (req, res) => {
+    const { name } = req.body
+        lightSide.push({
+            id: globalId,
+            name,
+            type,
+    })
+       res.status(200).send(name)
     }
-
 }
