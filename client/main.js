@@ -1,11 +1,12 @@
 
 const complimentBtn = document.getElementById("complimentBtn")
 const fortuneBtn = document.getElementById('fortuneBtn')
-const getChar = document.getElementById('characterBtn')
-const addChar = document.getElementById('addChar')
+const addCharBtn = document.getElementById('addChar')
+const getChar =document.getElementById('charlie')
+let na = document.getElementById('char')
+let type = document.getElementById('type')
 
 
-// destructer??? in here
 const getCompliment = () => {
     axios.get("http://localhost:4000/api/compliment/")
         .then(res => {
@@ -23,25 +24,58 @@ const getFortune = () => {
 };
 
 function getCharacter() {
-    axios.get("http://localhost:4000/api/character/")
+    axios.get("http://localhost:4000/api/character")
         .then(res => {
-            for (let i = 0; res.data.results.length > i; i++){
-                const newEl = document.createElement('p')
-                newEl.textContent = res.data.results[i]
+            for (let i = 0; res.data.length > i; i++){
+                const newEl = document.createElement('li')
+                const diffEl = document.createElement('ul')
+                diffEl.textContent = res.data[i].type
+                newEl.textContent = res.data[i].name
                 document.body.appendChild(newEl)
+                document.body.appendChild(diffEl)
             }
         })
+};
+function addCharacter(){
+    axios.post("http://localhost:4000/api/newcharacter", {
+        name: na.value,
+        type: type.value
+
+    })
+    .then(res => res.data)
     .catch(err => console.log(err))
+
 }
 
-function addCharacter(e) {
-    e.preventDefault()
-    axios.post('http://localhost:4000/api/character/', { name: ' ', type: 'your fave character' })
-    .then (res => res.data[' '])
-        
-    .catch(err => console.log(err))
+function getPizza(){
+    axios.get("http://localhost:4000/api/pizza")
+    .then(res => {
+        for(let i = 0; res.data.length > i; i++){
+        const pizza = document.createElement('ul')
+        pizza.textContent = res.data[i]
+        document.body.appendChild(pizza)
+        }
+    })
 }
+   function getCharlie(){
+        axios.get('http://localhost:4000/api/picture')
+        .then(res => {
+             const char = document.createElement('li')
+             char.textContent = res.data
+           document.body.appendChild(char)
+
+        })
+             
+
+        .catch(err => console.log(err))
+
+    }
+
+
+
 complimentBtn.addEventListener('click', getCompliment)
 fortuneBtn.addEventListener('click', getFortune)
-getChar.addEventListener('click', getCharacter)
-// addChar.addEventListener('click', addCharacter)
+addCharBtn.addEventListener('click', addCharacter)
+getChar.addEventListener('click', getCharlie)
+getCharacter()
+getPizza()

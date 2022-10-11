@@ -1,43 +1,5 @@
- let lightSide = [
-    {
-    name: 'ObiWan',
-    type: 'jedi',
-    id: 0
-    },
-    {
-    name:'Luke',
-    type: 'padawan and my favorite character',
-    id: 1
-    },
-    {
-    name:'Yoda', 
-    type: 'grand master',
-    id: 2
-    },
-    {
-    name:'Leia', 
-    type: 'rebellion leader',
-    id: 3
-    },
-    {
-    name: 'Chewy', 
-    type: 'RRWWWGG', 
-    id: 4
-    },
-    {
-    name: 'Anakin',
-    type: 'not a jedi master', 
-    id: 5
-    },
-    {
-    name: 'Ashoka Tano',
-    type: 'Also Favorite character',
-    id: 6
-    }
+ let lightSide = require('./db.json')
 
-
-]
-let globalId = lightSide.length
 
 module.exports = {
 
@@ -60,16 +22,36 @@ module.exports = {
         res.status(200).send(randomFortune);
     },
     getCharacter: (req, res) => {
-        
-     res.status(200).send(lightSide)
+        res.status(200).send(lightSide)
     },
     addCharacter: (req, res) => {
-    const { name } = req.body
+    const { name, type } = req.body
         lightSide.push({
             id: globalId,
             name,
             type,
     })
-       res.status(200).send(name)
+    globalId++
+
+       res.status(200).send(lightSide)
+    },
+    // deleteCharacter: (req, res) => {
+    //     let lightSide = require('./db.json')
+    //     const { name } = req.params;
+    //     for (let i = 0; lightSide.length; i++){
+    //         if (lightSide[i]=== +name){
+    //             lightSide.splice(i, 1)
+    //             return res.status(200).send(lightSide)
+    //         }
+    //     }
+    //     res.status(400).send("User not found.")
+        // },
+        getPizza: (req, res) => {
+            let za = ["PEP", "CHEESE", "MEET LOVERS"]
+            res.status(200).send(za)
+        },
+        getCharlie: (req, res) => {
+            let charlie =  "https://pbs.twimg.com/media/Fe0ol9_UYAE-wvf?format=jpg&name=large"
+            res.status(200).send(charlie)
+        }
     }
-}
