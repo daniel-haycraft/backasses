@@ -24,5 +24,5 @@ app.post("/api/newcharacter", addCharacter)
 app.get("/api/pizza", getPizza)
 app.get("/api/picture", getCharlie)
 app.delete("/api/character/:id", deleteCharacter)
-app.put("/api/character:id",updateCharacter)
+app.put("/api/character:id", updateCharacter)
 app.listen(4000, () => console.log("Server running on 4000"));

@@ -2,36 +2,44 @@
     {
     "name": "ObiWan",
     "type": "jedi",
+    "BBY": 57,
     "id": 0
     },
     {
     "name":"Luke",
     "type": "padawan and my favorite character",
+    "BBY": 19,
     "id": 1
+
     },
     {
     "name":"Yoda", 
     "type": "grand master",
+    "BBY": 896,
     "id": 2
     },
     {
     "name":"Leia", 
     "type": "rebellion leader",
+    "BBY": 19,
     "id": 3
     },
     {
     "name": "Chewy", 
-    "type": "RRWWWGG", 
+    "type": "RRWWWGG",
+    "BBY": 200,
     "id" : 4
     },
     {
     "name": "Anakin",
     "type": "not a jedi master", 
+    "BBY": 41,
     "id": 5
     },
     {
     "name": "Ashoka Tano",
     "type": "Also Favorite character",
+    "BBY": 36,
     "id": 6
     }
 

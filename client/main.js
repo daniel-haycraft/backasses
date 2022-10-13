@@ -6,6 +6,7 @@ const getChar =document.getElementById('charlie')
 const deleteChar = document.getElementById('deleteBtn')
 let na = document.getElementById('char')
 let type = document.getElementById('type')
+let bby = document.getElementById('bby')
 
 
 const getCompliment = () => {
@@ -31,12 +32,16 @@ function getCharacter() {
             for (let i = 0; res.data.length > i; i++){
                 const newEl = document.createElement('li')
                 const diffEl = document.createElement('ul')
-                diffEl.textContent = res.data[i].type
+                const aEl = document.createElement('ul')
+                
                 newEl.textContent = res.data[i].name
+                diffEl.textContent = res.data[i].type
+                aEl.textContent = res.data[i].BBY
                 newEl.addEventListener('click', () => {
                     deleteCharacter(res.data[i].id)
                 })
                 charContainer.appendChild(newEl)
+                charContainer.appendChild(aEl)
                 charContainer.appendChild(diffEl)
             }
         })
@@ -44,7 +49,8 @@ function getCharacter() {
 function addCharacter(){
     axios.post("http://localhost:4000/api/newcharacter", {
         name: na.value,
-        type: type.value
+        type: type.value,
+        bby: bby.value
 
     })
     .then(res => res.data)
@@ -81,21 +87,26 @@ function deleteCharacter(id){
         for (let i = 0; res.data.length > i; i++){
             const newEl = document.createElement('li')
             const diffEl = document.createElement('ul')
+            const aEl = document.createElement('ul')
             diffEl.textContent = res.data[i].type
             newEl.textContent = res.data[i].name
+            aEl.textContent = res.data[i].BBY
             newEl.addEventListener('click', () => {
                 deleteCharacter(res.data[i].id)
             })
             charContainer.appendChild(newEl)
             charContainer.appendChild(diffEl)
-
-    }
+            charContainer.appendChild(aEl)
+        }
     })
-    
 }
+
+
 complimentBtn.addEventListener('click', getCompliment)
 fortuneBtn.addEventListener('click', getFortune)
 addCharBtn.addEventListener('click', addCharacter)
 getChar.addEventListener('click', getCharlie)
+
+
 getCharacter()
-getPizza()
+// getPizza()

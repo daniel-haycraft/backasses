@@ -25,13 +25,12 @@ module.exports = {
         res.status(200).send(lightSide)
     },
     addCharacter: (req, res) => {
-    const { name, type } = req.body
+    const { name, type, bby } = req.body
         lightSide.push({
-            id: globalId,
             name,
             type,
+            bby,
     })
-    globalId++
 
        res.status(200).send(lightSide)
     },
@@ -55,6 +54,14 @@ module.exports = {
             res.status(200).send(charlie)
         },
         updateCharacter: (req, res) => {
-            
+          const { BBY } = req.params
+          const { type } = req.body
+          const swIndex =  lightSide.findIndex((light) => light.BBY === +BBY);
+          if (type === 'plus'){
+            light[swIndex].BBY += 5
+          } else if (type === 'minus'){
+            light[swIndex].BBY -= 1
+          }
+          res.status(200).send(lightSide)
         }
     }
