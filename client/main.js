@@ -3,6 +3,7 @@ const complimentBtn = document.getElementById("complimentBtn")
 const fortuneBtn = document.getElementById('fortuneBtn')
 const addCharBtn = document.getElementById('addChar')
 const getChar =document.getElementById('charlie')
+const deleteChar = document.getElementById('deleteBtn')
 let na = document.getElementById('char')
 let type = document.getElementById('type')
 
@@ -26,13 +27,17 @@ const getFortune = () => {
 function getCharacter() {
     axios.get("http://localhost:4000/api/character")
         .then(res => {
+            const charContainer = document.getElementById('character-container')
             for (let i = 0; res.data.length > i; i++){
                 const newEl = document.createElement('li')
                 const diffEl = document.createElement('ul')
                 diffEl.textContent = res.data[i].type
                 newEl.textContent = res.data[i].name
-                document.body.appendChild(newEl)
-                document.body.appendChild(diffEl)
+                newEl.addEventListener('click', () => {
+                    deleteCharacter(res.data[i].id)
+                })
+                charContainer.appendChild(newEl)
+                charContainer.appendChild(diffEl)
             }
         })
 };
@@ -44,7 +49,6 @@ function addCharacter(){
     })
     .then(res => res.data)
     .catch(err => console.log(err))
-
 }
 
 function getPizza(){
@@ -64,15 +68,31 @@ function getPizza(){
              char.textContent = res.data
            document.body.appendChild(char)
 
-        })
-             
+        })     
 
         .catch(err => console.log(err))
-
     }
 
+function deleteCharacter(id){
+    axios.delete(`http://localhost:4000/api/character/${id}`)
+    .then(res => {
+        const charContainer = document.getElementById('character-container')
+        charContainer.innerHTML = ' '
+        for (let i = 0; res.data.length > i; i++){
+            const newEl = document.createElement('li')
+            const diffEl = document.createElement('ul')
+            diffEl.textContent = res.data[i].type
+            newEl.textContent = res.data[i].name
+            newEl.addEventListener('click', () => {
+                deleteCharacter(res.data[i].id)
+            })
+            charContainer.appendChild(newEl)
+            charContainer.appendChild(diffEl)
 
-
+    }
+    })
+    
+}
 complimentBtn.addEventListener('click', getCompliment)
 fortuneBtn.addEventListener('click', getFortune)
 addCharBtn.addEventListener('click', addCharacter)

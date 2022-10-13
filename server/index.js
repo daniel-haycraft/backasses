@@ -13,6 +13,8 @@ const { getCharacter } = require('./controller')
 const { addCharacter } = require('./controller')
 const { getPizza } = require('./controller')
 const { getCharlie } = require('./controller')
+const { deleteCharacter } = require('./controller')
+const { updateCharacter } = require('./controller')
 
 
 app.get("/api/compliment", getCompliment);
@@ -21,4 +23,6 @@ app.get("/api/character", getCharacter)
 app.post("/api/newcharacter", addCharacter)
 app.get("/api/pizza", getPizza)
 app.get("/api/picture", getCharlie)
+app.delete("/api/character/:id", deleteCharacter)
+app.put("/api/character:id",updateCharacter)
 app.listen(4000, () => console.log("Server running on 4000"));
